@@ -1,0 +1,121 @@
+.cart-summary {
+  width: 100%;
+  padding: 20px 0;
+
+  .summary-row {
+    margin-bottom: 15px;
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+
+      h3 {
+        color: #303030;
+        font-size: 15px;
+        font-weight: normal;
+        margin: 0;
+      }
+
+      .summary-value {
+        color: #303030;
+        font-size: 18px;
+        font-weight: 500;
+        margin: 0;
+      }
+
+      .summary-discount {
+        color: #303030;
+        font-size: 15px;
+        font-weight: normal;
+        margin: 0;
+      }
+
+      .summary-shipping {
+        color: #303030;
+        font-size: 18px;
+        font-weight: 500;
+        margin: 0;
+      }
+    }
+  }
+
+  .summary-total {
+    margin-top: 0px;
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+
+      .total-label {
+        color: #303030;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0;
+      }
+
+      .total-amount {
+        h1 {
+          color: #46A358;
+          font-size: 18px;
+          font-weight: bold;
+          margin: 0;
+
+          &.line-through {
+            text-decoration: line-through;
+            color: #999;
+          }
+        }
+      }
+    }
+
+    .discounted-total {
+      color: #46A358;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: right;
+      margin: 5px 0 0 0;
+    }
+  }
+
+  // Responsive design
+  @media (max-width: 768px) {
+    padding: 15px 0;
+
+    .summary-row .summary-item {
+      padding: 8px 0;
+
+      h3 {
+        font-size: 14px;
+      }
+
+      .summary-value,
+      .summary-shipping {
+        font-size: 16px;
+      }
+
+      .summary-discount {
+        font-size: 14px;
+      }
+    }
+
+    .summary-total {
+      .total-row {
+        .total-label {
+          font-size: 15px;
+        }
+
+        .total-amount h1 {
+          font-size: 16px;
+        }
+      }
+
+      .discounted-total {
+        font-size: 16px;
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+.navbar{
+    padding: 26px 0 0 0 ;
+    margin-bottom: 12px;
+    .wrapper{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 18px;
+        border-bottom: 0.3px solid #46A35880;
+        .list{
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            a{
+                font-size: 16px;
+                font-weight: 400;
+                width: fit-content;
+                width: auto;
+                &:hover{
+                    border-bottom: 3px solid #46A358;
+                    padding-bottom: 28px;
+                    font-weight: 700;
+                    margin-bottom: -31px;
+                }
+            }
+        }
+        .left{
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            .btn{
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                img{
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+    }
+}

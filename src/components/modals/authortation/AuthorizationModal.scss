@@ -1,0 +1,26 @@
+.modal-wrapper {
+  padding: 5 px;
+  margin-top: 5px;
+  padding: 30px 100px ;
+  width: 500px; 
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    h3 {
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 500;
+
+    }
+    .tab {
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+
+      &.active {
+        color: #46a358; 
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+.categories {
+  background-color: #fbfbfb;
+  .list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 15px 20px;
+    cursor: pointer;
+    &:active{
+      color: green;
+    }
+    h5 {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 10px;
+    }
+  }
+   .active {
+    @extend .list; 
+    color: green;             
+
+    h5 {
+      color: green;           
+    }
+  }
+}
+

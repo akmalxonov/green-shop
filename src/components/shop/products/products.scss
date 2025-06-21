@@ -1,0 +1,38 @@
+.cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: start;
+  border-bottom: 1px solid #46A358;
+  padding-bottom: 12px;
+  margin-bottom: 15px;
+  &__col {
+    color: #303030;
+    font-size: 16px;
+    font-weight: 500;
+    padding-bottom: 10px;
+  }
+
+  &__product {
+    width: 46%;
+  }
+
+  &__price {
+    width: 20%;
+  }
+
+  &__quantity {
+    width: 26%;
+  }
+
+  &__total {
+    width: 20%;
+  }
+
+  &__delete {
+    color: #303030;
+    font-size: 16px;
+    font-weight: 500;
+    padding-bottom: 10px;
+  }
+}
