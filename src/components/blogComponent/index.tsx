@@ -2,7 +2,7 @@ import img from "../../assets/image.png";
 import "../blogComponent/blog.scss";
 import { setOpenAuthorizationModal } from "../../redux/modal-slice";
 import { useDispatch } from "react-redux";
-import { Button, Card, Input, Space } from "antd";
+import { Button, Card, Input, Skeleton, Space } from "antd";
 import type { blogType, DataType } from "../../@types";
 import { useQueryHandler } from "../../hooks/useQuery";
 import { useState, type ChangeEvent } from "react";
@@ -12,15 +12,15 @@ import { CiHeart } from "react-icons/ci";
 
 const BlogComp = () => {
   const dispatch = useDispatch();
-  const { data, isLoading }: DataType<blogType[]> = useQueryHandler<blogType[]>(
-    {
-      pathname: "categories",
-      url: "api/user/blog",
-      params: {
-        search: "",
-      },
-    }
-  );
+  const { data, isLoading, isError }: DataType<blogType[]> = useQueryHandler<
+    blogType[]
+  >({
+    pathname: "categories",
+    url: "api/user/blog",
+    params: {
+      search: "",
+    },
+  });
   console.log(data);
   const storedUser = localStorage.getItem("user");
   const [inputText, setInputText] = useState<string>("");
@@ -86,19 +86,25 @@ const BlogComp = () => {
             ];
 
             return (
-              <Card
-                key={value.id}
-                className="card"
-                loading={isLoading}
-                actions={actions}
-                style={{ minWidth: 300 }}
-              >
-                <Card.Meta
-                  className="card-title"
-                  title={value.title}
-                  description={value.short_description}
-                />
-              </Card>
+              <>
+                {isLoading || isError ? (
+                  <Skeleton active />
+                ) : (
+                  <Card
+                    key={value.id}
+                    className="card"
+                    loading={isLoading}
+                    actions={actions}
+                    style={{ minWidth: 300 }}
+                  >
+                    <Card.Meta
+                      className="card-title"
+                      title={value.title}
+                      description={value.short_description}
+                    />
+                  </Card>
+                )}
+              </>
             );
           })}
         </div>

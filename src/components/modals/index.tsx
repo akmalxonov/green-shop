@@ -1,15 +1,18 @@
-
-import { useReduxSelector } from '../../hooks/useRedux';
-import AuthorizationModal from './authortation';
+import { useReduxSelector } from "../../hooks/useRedux";
+import AuthorizationModal from "./authortation";
+import LogOutModal from "./authortation/log-out";
 
 const Modals = () => {
-    const {openAuthorizationModal} = useReduxSelector((state)=>state.modalSlice)
+  const { openAuthorizationModal, openLogOutModal } = useReduxSelector(
+    (state) => state.modalSlice
+  );
 
-    return (
-        <>
-           {openAuthorizationModal && <AuthorizationModal/>} 
-        </>
-    );
-}
+  return (
+    <>
+      {openAuthorizationModal && <AuthorizationModal />}
+      {openLogOutModal && <LogOutModal />}
+    </>
+  );
+};
 
 export default Modals;

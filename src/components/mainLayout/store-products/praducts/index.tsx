@@ -43,6 +43,7 @@ const Products = () => {
         <label className="sort-dropdown__label">Sort by:</label>
         <Select
           showSearch
+          className="select"
           placeholder="Default Sorting"
           defaultValue={sort}
           filterOption={(input, option) =>

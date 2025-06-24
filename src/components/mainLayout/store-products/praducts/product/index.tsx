@@ -4,13 +4,13 @@ import { useQueryHandler } from "../../../../../hooks/useQuery";
 import { useSearchParamsHandler } from "../../../../../hooks/useSearchParams";
 import "../product/product.scss";
 import { useState } from "react";
-import { ArrowLeft, Heart, Star } from "lucide-react";
+import { ArrowLeft, Heart } from "lucide-react";
 import { Avatar, Image, Rate, Skeleton, Tooltip } from "antd";
 import Navbar from "../../../../navbar";
 
 const Product = () => {
   const navigate = useNavigate();
-  const { getParam } = useSearchParamsHandler();
+  const { getParam } = useSearchParamsHandler();  
   const { category, id } = useParams();
   const sort = getParam("sort") || "default-sorting";
   const type = getParam("type") || "all-plants";

@@ -16,6 +16,7 @@
                 font-weight: 400;
                 width: fit-content;
                 width: auto;
+                cursor: pointer;
                 &:hover{
                     border-bottom: 3px solid #46A358;
                     padding-bottom: 28px;
@@ -28,10 +29,17 @@
             display: flex;
             align-items: center;
             gap: 30px;
+            .search{
+                cursor: pointer;
+            }
+            .shop{
+                cursor: pointer;
+            }
             .btn{
                 display: flex;
                 align-items: center;
                 gap: 4px;
+                cursor: pointer;
                 img{
                     width: 20px;
                     height: 20px;

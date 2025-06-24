@@ -1,0 +1,28 @@
+.profil {
+  .wrapper {
+    display: flex;
+    .ant-menu{
+      border-inline-end:none ;
+    }
+    .sidebar {
+      width: 300px;
+      height: 300px;
+      .ant-menu-item {
+        &:hover {
+          color: #46a358;
+        }
+      }
+      .ant-menu-item-active {
+        color: #46a358;
+        background-color: white;
+        border-radius: 0px;
+      }
+      .ant-menu-item-selected {
+        color: #46a358;
+        background-color: #46a35921;
+        border-radius: 0px;
+        border-left: 2px solid #46a358;
+      }
+    }
+  }
+}
