@@ -1,6 +1,6 @@
 import { useReduxSelector } from "../../../hooks/useRedux";
 import type { FC } from "react";
-import "../totol/totol.scss";
+import "../total/total.scss";
 
 const Total: FC = () => {
   const coupon_title_style = "text-[#303030] text-[15px] font-normal";
