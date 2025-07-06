@@ -1,10 +1,13 @@
 import {configureStore} from "@reduxjs/toolkit"
 import modalSlice from "../modal-slice"
+import likeSlice from "../likeSlice"
 import cardSlice  from "../shopSlice"
 export const store = configureStore({
     reducer:{
         modalSlice,
-        cardSlice   
+        cardSlice,
+        likeSlice,
+        
     }
 })
 

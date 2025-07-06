@@ -1,6 +1,7 @@
 import { useReduxSelector } from "../../../../hooks/useRedux";
 import "../prices/prices.scss";
 
+
 const Prices = () => {
   const coupon_title_style = "text-[#303030] text-[15px] font-normal";
   const { data = [], coupon = 0 } = useReduxSelector(
@@ -41,13 +42,7 @@ const Prices = () => {
             <h1 className={`${Boolean(coupon) && "line-through"}`}>{shippingTotol?.toFixed(2)}</h1>
           </div>
         </div>
-        {Boolean(coupon) && (
-          <h1 className="discounted-total">
-            {Boolean(coupon)
-              ? (shippingTotol - discountPrice).toFixed(2)
-              : totalPrice.toFixed(2)}
-          </h1>
-        )}
+        <h1 className={`${coupon ? "line-through" : ""}`}>{shippingTotol?.toFixed(2)}</h1>
       </div>
     </div>
   );

@@ -1,11 +1,20 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, type UseMutationResult } from "@tanstack/react-query";
 import { useAxios } from "../../useAxios";
-import type { AuthType } from "../../../@types";
+import type {
+  AddressType,
+  AuthType,
+  idType,
+  MakeOrderType,
+  CouponResponse,
+  AddressResponseType,
+  OrderResponseType
+} from "../../../@types";
 import { useDispatch } from "react-redux";
 import { setOpenAuthorizationModal } from "../../../redux/modal-slice";
 import { notificationApi } from "../../../generic/notificationApi";
 import { signInWithGoogle } from "../../../config";
 import { getCoupon } from "../../../redux/shopSlice";
+import { getLocal, setLocal } from "../../../generic/local";
 
 export const useLoginMutation = () => {
   const axios = useAxios();
@@ -20,8 +29,6 @@ export const useLoginMutation = () => {
       data: { token: string; user: AuthType };
     }) => {
       const { token, user } = res.data;
-      console.log(token);
-      console.log(user);
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
       notify("login_sucsses");
@@ -50,8 +57,6 @@ export const useRegisterMutation = () => {
       data: { token: string; user: AuthType };
     }) => {
       const { token, user } = res.data;
-      console.log(token);
-      console.log(user);
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
       dispatch(setOpenAuthorizationModal());
@@ -72,7 +77,6 @@ export const useRegisterWithGoogleMutation = () => {
     mutationKey: ["register-google"],
     mutationFn: async () => {
       const response = await signInWithGoogle();
-      console.log(response);
       return axios({
         url: "api/user/sign-up/google",
         method: "POST",
@@ -84,12 +88,10 @@ export const useRegisterWithGoogleMutation = () => {
       data: { token: string; user: AuthType };
     }) => {
       const { token, user } = res.data;
-      console.log(token);
-      console.log(user);
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
       dispatch(setOpenAuthorizationModal());
-      notify("login_sucsses")
+      notify("login_sucsses");
     },
     onError: (error: { status: number }) => {
       if (error.status === 406) {
@@ -118,8 +120,6 @@ export const useLoginWithGoogleMutation = () => {
       data: { token: string; user: AuthType };
     }) => {
       const { token, user } = res.data;
-      console.log(token);
-      console.log(user);
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
       notify("login_sucsses");
@@ -135,14 +135,73 @@ export const useGetCoupon = () => {
   const axios = useAxios();
   const dispatch = useDispatch();
   const notify = notificationApi();
-  return useMutation({
+  return useMutation<CouponResponse, Error, string>({
     mutationKey: ["coupon"],
     mutationFn: (coupon_code: string) =>
       axios({ url: "api/features/coupon", params: { coupon_code } }),
     onSuccess(data) {
-      console.log(data.data.discount_for);
       dispatch(getCoupon(data.data.discount_for));
-      notify("get_coupon")
+      notify("get_coupon");
+    },
+  });
+};
+
+export const useAddressMutation = (): UseMutationResult<AddressResponseType, Error, AddressType> => {
+  const notify = notificationApi();
+  const axios = useAxios();
+
+  return useMutation<AddressResponseType, Error, AddressType>({
+    mutationKey: ["add-address"],
+    mutationFn: (data: AddressType) =>
+      axios({ url: "api/user/address", method: "POST", body: data }),
+    onSuccess: (res) => {
+      const user = getLocal("user");
+      const address = res;
+
+      if (user && address && address?.country) {
+        const updatedUser = {
+          ...user,
+          billing_address: address,
+        };
+        setLocal("user", updatedUser);
+        notify("add_address");
+      } else {
+        console.warn("❌ billing_address topilmadi yoki bo‘sh:", address);
+      }
+    },
+    onError: () => {
+      console.log("❌ Failed to add address");
+    },
+  });
+};
+
+export const useOrderMutation = (): UseMutationResult<OrderResponseType, Error, MakeOrderType> => {
+  const notify = notificationApi();
+  const axios = useAxios();
+
+  return useMutation<OrderResponseType, Error, MakeOrderType>({
+    mutationKey: ["order"],
+    mutationFn: (data: MakeOrderType) =>
+      axios({ url: "api/order/make-order", method: "POST", body: data }),
+    onSuccess: (res) => {
+      const user = getLocal("user");
+      console.log(res);
+      console.log(user);
+      notify("add_address");
+    },
+  });
+};
+
+export const useOrderDeleteMutation = (): UseMutationResult<unknown, Error, idType> => {
+  const notify = notificationApi();
+  const axios = useAxios();
+
+  return useMutation<unknown, Error, idType>({
+    mutationKey: ["delete-order"],
+    mutationFn: (data: idType) =>
+      axios({ url: "api/order/delete-order", method: "DELETE", body: data }),
+    onSuccess: () => {
+      notify("delete_order");
     },
   });
 };

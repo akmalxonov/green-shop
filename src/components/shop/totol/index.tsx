@@ -4,11 +4,12 @@ import Prices from "./prices";
 import { Form } from "antd";
 import { useGetCoupon } from "../../../hooks/useQuery/useQueryAction";
 import { Loader } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const ShopTotal: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { mutate, isPending } = useGetCoupon();
-
+  const navigate = useNavigate()
   const getCoupon = () => {
     const value = inputRef.current?.value;
     if (!value || value.trim() === "") return;
@@ -38,16 +39,11 @@ const ShopTotal: React.FC = () => {
             )}
           </button>
         </Form>
-
-        {/* Prices */}
         <Prices />
-
-        {/* Checkout Button */}
         <div className="prices-section">
-          <button className="proceed-btn">Proceed To Checkout</button>
+          <button className="proceed-btn" onClick={()=>navigate("/checkout")}>Proceed To Checkout</button>
         </div>
 
-        {/* Continue Shopping */}
         <div className="continue-shopping">
           <button className="continue-btn">Continue Shopping</button>
         </div>

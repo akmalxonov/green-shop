@@ -1,67 +1,74 @@
-import React from 'react';
-import {Table } from 'antd';
-import type { TableProps } from 'antd';
-import "../track-order/track.scss"
-interface DataType {
+import React from "react";
+import { Table } from "antd";
+import type { TableProps } from "antd";
+import "../track-order/track.scss";
+import { useQueryHandler } from "../../../hooks/useQuery";
+import type { DataType, OrderType } from "../../../@types";
+import { useDispatch } from "react-redux";
+import { setOpenMoreInfoModal } from "../../../redux/modal-slice";
+import Modals from "../../modals";
+
+interface DataType2 {
   key: string;
-  name: string;
-  age: number;
-  address: string;
-  tags: string[];
+  id: string;
+  Data: string;
+  total: string | number;
 }
 
-const columns: TableProps<DataType>['columns'] = [
+
+const TrackOrder: React.FC = () => {
+      const dispatch = useDispatch()
+
+  const { data }: DataType<OrderType[]> = useQueryHandler<OrderType[]>({
+    pathname: "categories",
+    url: "api/order/get-order",
+  });
+  
+  const transformedData: DataType2[] =
+    data?.map((item) => ({
+      key: item._id,
+      id: item._id,
+      Data: new Date(item.created_at).toLocaleDateString(),
+      total: item.extra_shop_info?.total?.toFixed(2) ?? "0.00",
+    })) || [];
+
+const columns: TableProps<DataType2>["columns"] = [
   {
-    title: 'Order Number',
-    dataIndex: 'name',
-    key: 'name',
+    title: "Order Number",
+    dataIndex: "id",
+    key: "id",
     render: (text) => <a>{text}</a>,
     width: 300,
   },
   {
-    title: 'Data',
-    dataIndex: 'age',
-    key: 'age',
+    title: "Date",
+    dataIndex: "Data",
+    key: "Data",
     width: 200,
   },
   {
-    title: 'Total',
-    dataIndex: 'address',
-    key: 'address',
+    title: "Total",
+    dataIndex: "total",
+    key: "total",
     width: 200,
   },
   {
-    title: 'More',
-    key: 'action',
-    render:()=> <a href="#">More Info</a>,
+    title: "More",
+    key: "more",
+    render: (_,record) => <a href="#" onClick={()=> dispatch(setOpenMoreInfoModal(record.id))}>More Info</a>,
     width: 200,
   },
 ];
-
-const data: DataType[] = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sydney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
-
-const TrackOrder: React.FC = () => <Table<DataType> className='table' columns={columns} dataSource={data} />;
+  return (
+    <>
+    <Table<DataType2>
+      className="table"
+      columns={columns}
+      dataSource={transformedData}
+    />
+    <Modals/>
+    </>
+  );
+};
 
 export default TrackOrder;

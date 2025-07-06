@@ -3,7 +3,7 @@ export const getLocal=(path:string)=>{
         const data = localStorage.getItem(path)
         const res = JSON.parse(data as string)
         return res
-    } catch (err) {
+    } catch  {
         return null
     }
 }
@@ -12,7 +12,7 @@ export const setLocal=(path:string,data:object)=>{
     try {
         const resJson = JSON.stringify(data)
         localStorage.setItem(path,resJson)
-    } catch (err) {
+    } catch  {
         return null
     }
 }

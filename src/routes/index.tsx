@@ -9,6 +9,7 @@ import AccountDetails from "../components/profil-comp/account-details";
 import MyProduct from "../components/profil-comp/my-product";
 import Wishlist from "../components/profil-comp/wishlist";
 import TrackOrder from "../components/profil-comp/track-order";
+import Checkout from "../pages/checkout/checkout";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
   {
     path: "/shop",
     element: <ShopComponent />,
+  },
+  {
+    path: "/checkout",
+    element: <Checkout/>,
   },
   {
     path: "/profil",

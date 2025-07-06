@@ -8,6 +8,10 @@ type NotifyType =
   | "register_sucsses"
   | "product_add"
   | "get_coupon"
+  | "add_wishlist"
+  | "remove_wishlist"
+  | "add_address"
+  |  "delete_order"
   | "detete_card";
 
 export const notificationApi = () => {
@@ -29,6 +33,14 @@ export const notificationApi = () => {
         return notification.error({ message: "Email already exsist" });
       case "detete_card":
         return notification.warning({ message: "Removed from cart !" });
+      case "add_wishlist":
+        return notification.success({ message: "Product added to wishlist" });
+      case "remove_wishlist":
+        return notification.warning({ message: "Product removed from wishlist" });
+        case "add_address":
+        return notification.success({ message: "Address updated successfully" });
+        case "delete_order":
+        return notification.success({ message: "Deleted from your order" });
     }
   };
   return notify;

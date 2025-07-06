@@ -12,6 +12,7 @@ import { useSearchParamsHandler } from "../../../../../hooks/useSearchParams";
 import { useDispatch } from "react-redux";
 import { getData } from "../../../../../redux/shopSlice";
 import { useReduxSelector } from "../../../../../hooks/useRedux";
+import { toggleLike } from "../../../../../redux/likeSlice";
 const CardComp: FC<ProductsType> = (props) => {
   const navigate = useNavigate();
    const { getParam } = useSearchParamsHandler();
@@ -48,9 +49,9 @@ const CardComp: FC<ProductsType> = (props) => {
           <div className="style_icons" onClick={() => dispatch(getData(props))}>
             <ShoppingCartOutlined />
           </div>
-          <div className="style_icons">
+          <div className="style_icons" onClick={()=>dispatch(toggleLike(props))}>
             <HeartOutlined />
-          </div>
+          </div> 
           <div
             onClick={() => navigate(`/plant-info/${category}/${props._id}`)}
             className="style_icons"

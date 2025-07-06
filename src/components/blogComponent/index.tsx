@@ -12,9 +12,7 @@ import { CiHeart } from "react-icons/ci";
 
 const BlogComp = () => {
   const dispatch = useDispatch();
-  const { data, isLoading, isError }: DataType<blogType[]> = useQueryHandler<
-    blogType[]
-  >({
+  const { data, isLoading, isError }: DataType<blogType[]> = useQueryHandler<blogType[]>({
     pathname: "categories",
     url: "api/user/blog",
     params: {
@@ -25,11 +23,10 @@ const BlogComp = () => {
   const storedUser = localStorage.getItem("user");
   const [inputText, setInputText] = useState<string>("");
   const [searchText, setSearchText] = useState<string>("");
-  searchText;
   const filteredData = data?.filter((value) =>
     `${value.title} ${value.short_description}`
       .toLowerCase()
-      .includes(inputText.toLowerCase())
+      .includes(searchText.toLowerCase() ||inputText.toLowerCase())
   );
   return (
     <div className="blog">

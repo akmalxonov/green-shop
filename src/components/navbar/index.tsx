@@ -13,7 +13,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [name, setName] = useState("Login");
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -51,9 +51,11 @@ const Navbar = () => {
             <button
               className="btn"
               onClick={() => {
-                token
-                  ? navigate("/profil")
-                  : dispatch(setOpenAuthorizationModal());
+                if (token) {
+                  navigate("/profil");
+                } else {
+                  dispatch(setOpenAuthorizationModal());
+                }
               }}
             >
               {" "}

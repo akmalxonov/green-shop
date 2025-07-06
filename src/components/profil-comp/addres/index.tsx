@@ -1,96 +1,114 @@
-import React from 'react';
-import type { FormProps } from 'antd';
-import { Form, Input, Row, Col } from 'antd';
+import React from "react";
+import type { FormProps } from "antd";
+import { Form, Input, Row, Col } from "antd";
+import { useAddressMutation } from "../../../hooks/useQuery/useQueryAction";
+import { getLocal } from "../../../generic/local";
 
-type FieldType = {
-  Country?: string;
-  TownCity?: string;
-  StateAddress?: string;
-  ExtraAddress?: string;
-  State?: string;
-  Zip?: string;
+interface AddressFormValues {
+  name:string,
+  surname:string,
+  country:string,
+  town:string,
+  street_address:string,
+  additional_street_address:string,
+  state:string,
+  zip:string
+}
+
+const onFinishFailed: FormProps<AddressFormValues>["onFinishFailed"] = (errorInfo) => {
+  console.log("Failed:", errorInfo);
 };
 
-const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-  console.log('Success:', values);
+const Addres: React.FC = () => {
+  const { mutate } = useAddressMutation();
+  const onFinish: FormProps<AddressFormValues>["onFinish"] = (values) => {
+    console.log("Success:", values);
+    const user = getLocal("user") || {};
+    const transformedData = {
+      _id:user._id,
+      name: user.name,
+      surname: user.surname,
+      town: values.town,
+      street_address: values.street_address,
+      email: values.state,
+      phone_number: values.zip,
+      country:values.country,
+      state:values.state,
+      zip:values.zip
+    };
+
+    mutate(transformedData);
+  };
+
+  return (
+    <Form
+      name="basic"
+      className="basic"
+      initialValues={{ remember: true }}
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      autoComplete="off"
+      layout="vertical"
+    >
+      <Row gutter={24}>
+        <Col span={12}>
+          <Form.Item<AddressFormValues>
+            label="Country / Region"
+            name="country"
+            rules={[{ required: true, message: "Please enter first name" }]}
+          >
+            <Input placeholder="" />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item<AddressFormValues>
+            label="Town city"
+            name="town"
+            rules={[{ required: true, message: "Please enter last name" }]}
+          >
+            <Input placeholder="" />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item<AddressFormValues>
+            label="State address"
+            name="street_address"
+            rules={[{ required: true, message: "Please enter town or city" }]}
+          >
+            <Input placeholder="" />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item<AddressFormValues>
+            label="Extra address"
+            name="additional_street_address"
+            rules={[{ required: true, message: "Please enter street address" }]}
+          >
+            <Input placeholder="" />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item<AddressFormValues>
+            label="State"
+            name="state"
+            rules={[{ required: true, message: "Please enter email" }]}
+          >
+            <Input placeholder="" />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item<AddressFormValues>
+            label="Zip"
+            name="zip"
+            rules={[{ required: true, message: "Please enter phone number" }]}
+          >
+            <Input placeholder="" />
+          </Form.Item>
+        </Col>
+      </Row>
+      <button className="btn">Save changes</button>
+    </Form>
+  );
 };
-
-const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
-  console.log('Failed:', errorInfo);
-};
-
-
-const Addres: React.FC = () => (
-  <Form
-    name="basic"
-    className="basic"
-    initialValues={{ remember: true }}
-    onFinish={onFinish}
-    onFinishFailed={onFinishFailed}
-    autoComplete="off"
-    layout="vertical"
-  >
-    <Row gutter={24}>
-      <Col span={12}>
-        <Form.Item<FieldType>
-          label="Country / Region"
-          name="Country"
-          
-          rules={[{ required: true, message: 'Please enter country...' }]}
-        >
-          <Input placeholder='Type enter country...' style={{ width: '100%' }} />
-        </Form.Item>
-      </Col>
-
-      <Col span={12}>
-        <Form.Item<FieldType>
-          label="Town city"
-          name="TownCity"
-          rules={[{ required: true, message: 'Please input your email!' }]}
-        >
-          <Input placeholder="Type enter town city..." style={{ width: '100%' }} />
-        </Form.Item>
-      </Col>
-      <Col span={12}>
-        <Form.Item<FieldType>
-          label="State address"
-          name="StateAddress"
-          rules={[{ required: true, message: 'Please input your email!' }]}
-        >
-          <Input placeholder="Type enter street address..." style={{ width: '100%' }} />
-        </Form.Item>
-      </Col>
-
-      <Col span={12}>
-        <Form.Item<FieldType>
-          label="Extra address"
-          name="ExtraAddress"
-          rules={[{ required: true, message: 'Please input your address!' }]}
-        >
-          <Input placeholder="Type enter extra address..." style={{ width: '100%' }} />
-        </Form.Item>
-      </Col>
-      <Col span={12}>
-        <Form.Item<FieldType>
-          label="State"
-          name="State"
-          rules={[{ required: true, message: 'Please input your address!' }]}
-        >
-          <Input placeholder="Type enter state..." style={{ width: '100%' }} />
-        </Form.Item>
-      </Col>
-      <Col span={12}>
-        <Form.Item<FieldType>
-          label="Zip"
-          name="Zip"
-          rules={[{ required: true, message: 'Please input your address!' }]}
-        >
-          <Input placeholder="Type enter extra zip..." style={{ width: '100%' }} />
-        </Form.Item>
-      </Col>
-    </Row>
-    <button className='btn'>Save changes</button>
-  </Form>
-);
 
 export default Addres;
