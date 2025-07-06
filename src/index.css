@@ -15,11 +15,24 @@ a{
     color: inherit;
     display: block;
 }
+
 .container{
     width: 1200px;
     margin:0 auto;
 }
 
+@media (max-width: 1023px)  {
+  .container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    width: 100%;
+    padding: 0 15px;
+  }
+}
 :root{
     --color-green:#46A358;
     --color-white:#fff;

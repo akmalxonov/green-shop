@@ -1,37 +1,84 @@
-.products{
-    .top{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 30px;
-        .select{
-            cursor: pointer;
-        }
-        .list{
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            cursor: pointer;
-            .item{
-                font-size: 15px;
-                font-weight: 400;
-                transition: 0.3s ease-in-out;
-                width:fit-content;
-                 display: inline-block;
-                 
-                &:hover{
-                    color: var(--color-green);
-                    font-weight: 700;
-                    border-bottom: 1px solid var(--color-green);
-                    padding-bottom: 5px;
-                    margin-bottom: -5px;
-                }
-            }
-        }
+.products {
+  background-color: white;
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+
+    .select {
+      cursor: pointer;
+      font-size: 16px;
     }
-    .wrapper{
-        display: grid;
-        grid-template-columns: repeat(3,1fr);
-        gap: 40px;
+
+    .list {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      cursor: pointer;
+
+      .item {
+        font-size: 15px;
+        font-weight: 400;
+        transition: 0.3s ease-in-out;
+        width: fit-content;
+        display: inline-block;
+
+        &:hover {
+          color: var(--color-green);
+          font-weight: 700;
+          border-bottom: 1px solid var(--color-green);
+          padding-bottom: 5px;
+          margin-bottom: -5px;
+        }
+      }
     }
+  }
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  // ✅ RESPONSIVE MEDIA QUERIES
+
+  @media (max-width: 1024px) {
+    .top {
+      gap: 20px;
+
+      .list {
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+    }
+
+    .wrapper {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .top {
+      align-items: stretch;
+      .select {
+        font-size: 14px;
+      }
+
+      .list {
+        gap: 12px;
+        .item {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .wrapper {
+      grid-template-columns: repeat(2,1fr);
+      gap: 20px;
+    }
+  }
 }

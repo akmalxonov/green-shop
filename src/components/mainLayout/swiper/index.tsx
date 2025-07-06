@@ -2,15 +2,14 @@ import React from "react";
 import { Carousel } from "antd";
 import '../swiper/swiper.scss';
 const contentStyle: React.CSSProperties = {
-  height: "400px",
+  height: "500px",
   color: "#fff",
 };
-
 const Swiper: React.FC = () => (
   <div className="container">
     <Carousel autoplay>
       <div>
-        <div style={contentStyle}>
+        <div className="" style={contentStyle}>
           <div className="hero">
             <div className="hero__text">
               <p className="hero__welcome">WELCOME TO GREENSHOP</p>

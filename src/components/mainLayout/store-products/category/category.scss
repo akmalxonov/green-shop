@@ -1,28 +1,64 @@
 .categories {
   background-color: #fbfbfb;
-  .list {
+  .filter{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 20px;
-    padding: 15px 20px;
-    cursor: pointer;
-    &:active{
-      color: green;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #46a358;
+    color: white;
+    display: none;
+    h2{
+      font-size: 20px;
     }
-    h5 {
-      font-size: 15px;
-      font-weight: 700;
-      line-height: 10px;
+    .setting{
+      font-size: 25px;
     }
   }
-   .active {
-    @extend .list; 
-    color: green;             
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    .list {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding: 15px 20px;
+      cursor: pointer;
+      &:active {
+        color: green;
+      }
+      h5 {
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 10px;
+      }
+    }
+    .active {
+      @extend .list;
+      color: green;
 
-    h5 {
-      color: green;           
+      h5 {
+        color: green;
+      }
     }
   }
 }
 
+
+@media (max-width: 640px) {
+  .categories{
+    .filter{
+      display: flex;
+    }
+    .wrapper {
+      height: 0;
+      overflow: hidden; /* yopiq holatda ichidagi elementlar ko'rinmasligi uchun */
+      transition: height 0.3s ease;
+      &.active {
+        height: 100vh;
+      }
+    }
+  }
+}

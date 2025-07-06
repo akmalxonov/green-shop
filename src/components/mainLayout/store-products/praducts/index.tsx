@@ -9,53 +9,68 @@ import CardComp from "./card";
 const Products = () => {
   const { getParam, setParam } = useSearchParamsHandler();
   const category = getParam("category") || "house-plants";
-  const sort = getParam("sort") || "default-sorting" 
-  const type = getParam("type") || "all-plants" 
+  const sort = getParam("sort") || "default-sorting";
+  const type = getParam("type") || "all-plants";
   const range_min = getParam("range_min") || 0;
   const range_max = getParam("range_max") || 1000;
   const handleChange = (e: string) => {
     console.log(e);
-    setParam({category,sort:e,type})
+    setParam({ category, sort: e, type });
   };
 
   const { data, isLoading, isError }: DataType<ProductsType[]> =
     useQueryHandler<ProductsType[]>({
       pathname: `products${category}-${sort}-${type}-${range_min}-${range_max}`,
       url: `api/flower/category/${category}`,
-      params:{
+      params: {
         sort,
         type,
         range_min,
-        range_max
-      }
+        range_max,
+      },
     });
-      console.log(data);
+  console.log(data);
   const { products_loader } = useLoader();
   return (
     <div className="products">
       <div className="top">
         <ul className="list">
-          {title_category.map((value)=>(
-            <li onClick={()=>setParam({category,sort,type:value.key,range_min,range_max})} key={value.key}>{value.title}</li>
+          {title_category.map((value) => (
+            <li
+              onClick={() =>
+                setParam({
+                  category,
+                  sort,
+                  type: value.key,
+                  range_min,
+                  range_max,
+                })
+              }
+              key={value.key}
+            >
+              {value.title}
+            </li>
           ))}
         </ul>
 
-        <label className="sort-dropdown__label">Sort by:</label>
-        <Select
-          showSearch
-          className="select"
-          placeholder="Default Sorting"
-          defaultValue={sort}
-          filterOption={(input, option) =>
-            (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
-          }
-          onChange={handleChange}
-          options={[
-            { value: "default-sorting", label: "Default Sorting" },
-            { value: "the-cheapest", label: "The Cheapest" },
-            { value: "most-expensive", label: "Most Expensive" },
-          ]}
-        />
+        <div className="select-all">
+          <label className="sort-dropdown__label">Sort by:</label>
+          <Select
+            showSearch
+            className="select"
+            placeholder="Default Sorting"
+            defaultValue={sort}
+            filterOption={(input, option) =>
+              (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+            }
+            onChange={handleChange}
+            options={[
+              { value: "default-sorting", label: "Default Sorting" },
+              { value: "the-cheapest", label: "The Cheapest" },
+              { value: "most-expensive", label: "Most Expensive" },
+            ]}
+          />
+        </div>
       </div>
       <div className="wrapper">
         {isLoading || isError

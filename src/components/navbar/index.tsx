@@ -9,11 +9,13 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Badge } from "antd";
 import { useReduxSelector } from "../../hooks/useRedux";
+import { GiHamburgerMenu } from "react-icons/gi";
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [name, setName] = useState("Login");
   const token = localStorage.getItem("token");
+
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -22,6 +24,8 @@ const Navbar = () => {
     }
   }, []);
   const { data } = useReduxSelector((state) => state.cardSlice);
+
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="navbar">
       <div className="container">
@@ -29,6 +33,50 @@ const Navbar = () => {
           <div className="logo">
             <img src={logo} alt="" />
           </div>
+          <div className="list">
+            <a href="#" onClick={() => navigate("/")}>
+              Home
+            </a>
+            <a href="#">Shop</a>
+            <a href="#">Plant Care</a>
+            <a href="#" onClick={() => navigate("/blog")}>
+              Blogs
+            </a>
+          </div>
+          <div className="left">
+            <div className="search">
+              <img src={search} alt="" />
+            </div>
+            <div className="shop" onClick={() => navigate("/shop")}>
+              <Badge count={data.length}>
+                <img src={shop} alt="" />
+              </Badge>
+            </div>
+            <button
+              className="btn"
+              onClick={() => {
+                if (token) {
+                  navigate("/profil");
+                } else {
+                  dispatch(setOpenAuthorizationModal());
+                }
+              }}
+            >
+              {" "}
+              <img src={logout} alt="" /> {name}
+            </button>
+          </div>
+          <div
+            className="hamburger"
+            onClick={() => {
+              setIsOpen(!isOpen);
+              console.log("bosildi");
+            }}
+          >
+            <GiHamburgerMenu />
+          </div>
+        </div>
+        <div className={`wrapper2 ${isOpen ? "active" : ""}`}>
           <div className="list">
             <a href="#" onClick={() => navigate("/")}>
               Home

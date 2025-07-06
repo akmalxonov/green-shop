@@ -1,40 +1,83 @@
 .blog {
   margin: 20px 0;
+
   h1 {
     font-size: 60px;
     font-weight: 700;
     text-align: center;
     margin-bottom: 20px;
+
     span {
       color: #46a358;
     }
   }
+
   p {
     font-size: 16px;
     font-weight: 500;
     text-align: center;
     margin-bottom: 20px;
   }
+
   .btn {
     display: flex;
     justify-content: center;
     margin: auto;
   }
+
   .all {
     margin: 40px 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+
     .card {
       height: auto;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       overflow: hidden;
+
       .ant-card-actions {
         margin-top: auto;
         width: 100%;
       }
+    }
+  }
+
+  // Tablet (768px - 1023px)
+  @media (max-width: 1023px) and (min-width: 768px) {
+    h1 {
+      font-size: 45px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+
+    .all {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+  }
+
+  // Mobile (max 767px)
+  @media (max-width: 767px) {
+    h1 {
+      font-size: 32px;
+    }
+
+    p {
+      font-size: 13px;
+    }
+
+    .all {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .btn {
+      margin: 20px auto;
     }
   }
 }
