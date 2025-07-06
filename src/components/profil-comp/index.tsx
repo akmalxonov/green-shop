@@ -9,6 +9,8 @@ import { IoMdLogOut } from "react-icons/io";
 import "../profil-comp/profil.scss";
 import { useDispatch } from "react-redux";
 import { setOpenLogOutModal } from "../../redux/modal-slice"; // 🔁 PATH TO‘G‘RI BO‘LSIN
+import { MenuFoldOutlined } from "@ant-design/icons";
+import { useState } from "react";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -52,19 +54,22 @@ const ProfilComp: React.FC = () => {
       ],
     },
   ];
-
+  const [isActive,setIsActive] = useState(false)
   return (
     <div className="profil">
       <div className="container">
         <div className="wrapper">
+          <MenuFoldOutlined onClick={()=>setIsActive(!isActive)}  className="hamburger"/>
           <Menu
+          
             onClick={onClick}
-            className="sidebar"
+            className={`sidebar${isActive?"active":""}`}
             defaultSelectedKeys={["1"]}
             mode="inline"
             items={items}
             style={{ fontSize: "16px" }}
           />
+          
           <div className="content">
             <Outlet />
           </div>

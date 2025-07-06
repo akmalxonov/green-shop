@@ -10,7 +10,6 @@ const Card: FC<ProductTypeLocal> = (props) => {
     const dispatch = useDispatch()
   return (
     <div className="card">
-      {/* Mahsulot rasmi va nomi */}
       <div className="card__info">
         <img className="card__image" src={props.main_image} alt="image" />
         <div>
@@ -19,24 +18,20 @@ const Card: FC<ProductTypeLocal> = (props) => {
         </div>
       </div>
 
-      {/* Narx */}
       <div className="card__price">
         {props.price}
       </div>
 
-      {/* Miqdor tugmalari */}
       <div className="card__quantity">
         <button className="card__btn"onClick={()=>dispatch(decrement(props._id))}>-</button>
         <span className="card__count">{props.count}</span>
         <button className="card__btn" onClick={()=>dispatch(increment(props._id))}>+</button>
       </div>
 
-      {/* Umumiy narx */}
       <div className="card__total">
         {props.userPrice.toFixed(2)}
       </div>
 
-      {/* O'chirish tugmasi */}
       <button className="card__remove" onClick={()=>dispatch(deleteData(props._id))}>×</button>
     </div>
   );

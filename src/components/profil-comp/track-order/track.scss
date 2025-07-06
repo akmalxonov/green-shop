@@ -1,8 +1,37 @@
 .table {
-  .content {
-    width: 600px;
+  width: 100%;
+  overflow-x: auto;
+
+  .ant-table {
+    width: 100%;
   }
+
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .td {
+    text-align: start;
+  }
+
   .ant-table-pagination {
-        display: none;
-      }
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .table {
+    // width: 80%;
+    .ant-table {
+      font-size: 12px;
+    }
+
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+      padding: 8px;
+      white-space: nowrap;
+    }
+  }
 }

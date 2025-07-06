@@ -1,7 +1,16 @@
-.checkout{
-    .wrapper{
-        display: grid;
-        grid-template-columns:  60% 40%;
-        gap: 30px;
+.checkout {
+  .wrapper {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .checkout {
+    .wrapper {
+      display: flex;
+      flex-direction: column-reverse;
     }
+  }
 }

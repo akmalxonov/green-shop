@@ -39,24 +39,28 @@ const columns: TableProps<DataType2>["columns"] = [
     key: "id",
     render: (text) => <a>{text}</a>,
     width: 300,
+    className:"td"
   },
   {
     title: "Date",
     dataIndex: "Data",
     key: "Data",
     width: 200,
+    className:"td"
   },
   {
     title: "Total",
     dataIndex: "total",
     key: "total",
     width: 200,
+    className:"td"
   },
   {
     title: "More",
     key: "more",
     render: (_,record) => <a href="#" onClick={()=> dispatch(setOpenMoreInfoModal(record.id))}>More Info</a>,
     width: 200,
+    className:"td"
   },
 ];
   return (
