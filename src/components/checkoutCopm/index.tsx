@@ -1,13 +1,13 @@
 import Form from "./form";
-import Totol from "./totol";
 import "../checkoutCopm/checkout.scss"
+import Total from "./total";
 const CheckoutComp = () => {
     return (
         <div className="checkout">
             <div className="container">
                 <div className="wrapper">
                     <Form/>
-                    <Totol/>
+                    <Total/>
                 </div>
             </div>
         </div>

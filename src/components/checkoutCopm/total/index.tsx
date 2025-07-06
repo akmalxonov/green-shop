@@ -1,9 +1,8 @@
 import { useReduxSelector } from "../../../hooks/useRedux";
 import type { FC } from "react";
-import type { ProductTypeLocal } from "../../../@types";
 import "../totol/totol.scss";
 
-const Totol: FC<ProductTypeLocal> = () => {
+const Total: FC = () => {
   const coupon_title_style = "text-[#303030] text-[15px] font-normal";
   const { data = [], coupon = 0 } = useReduxSelector(
     (state) => state.cardSlice || {}
@@ -80,4 +79,4 @@ const Totol: FC<ProductTypeLocal> = () => {
   );
 };
 
-export default Totol;
+export default Total;
