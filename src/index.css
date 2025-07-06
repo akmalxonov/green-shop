@@ -19,6 +19,7 @@ a{
 .container{
     width: 1200px;
     margin:0 auto;
+    border: 1px solid black;
 }
 
 @media (max-width: 1023px)  {
@@ -27,7 +28,7 @@ a{
   }
 }
 
-@media (max-width: 767px) {
+@media (min-width: 375px) and (max-width: 767px) {
   .container {
     width: 100%;
     padding: 0 15px;

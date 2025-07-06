@@ -1,11 +1,20 @@
 .navbar {
   padding: 26px 0 0 0;
   margin-bottom: 12px;
+  background-color: white;
+    background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 99;
   .wrapper2 {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
     display: none;
+    background-color: white;
+
     .list {
       display: flex;
       align-items: center;
@@ -109,12 +118,18 @@
   @media (max-width: 767px) {
     padding: 15px 0 0 0;
     margin-bottom: 10px;
+    z-index: 99;
+    background-color: white;
+    position: sticky;
+    top: 0;
     .wrapper2 {
       display: flex;
-      margin-top: -45px;
+      margin-top: -85px;
       transition: 0.3s ease-in-out;
+      opacity: 0;
       &.active {
         margin-top: 10px;
+        opacity: 1;
       }
     }
     .wrapper {
